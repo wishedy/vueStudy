@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue常见指令</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload=function(){
+            var ng=new Vue({
+                "el":"#box",
+                data:{
+                    msg:"welcome,vue",
+                    msg2:true,
+                    msg3:12,
+                    msg4:{"a":"aaa","b":"bbb"},//转换为obj展示
+                    msg5:["a","b","c"]//转换为字符串展示
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <input type="text" v-model="msg">
+    <p >{{msg}}</p>
+    <p>{{msg2}}</p>
+    <p>{{msg3}}</p>
+    <p>{{msg4}}</p>
+    <p>{{msg5}}</p>
+    <ul>
+        <li v-for="item in msg5">{{item}}{{$index}}</li>
+    </ul>
+    <ul>
+        <li v-for="item in msg4">{{item}}{{$index}}{{$key}}</li>
+    </ul>
+    <ul>
+        <li v-for="(k,v) in msg4">{{k}}{{v}}{{$index}}{{$key}}</li>
+    </ul>
+</div>
+</body>
+</html>

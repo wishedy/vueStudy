@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue基础事件</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload=function(){
+            var c = new Vue({
+               el:"#box",
+                data:{
+                    "msg":"hello",
+                    fruit:["a","b","c","d"],
+                    isShow:true
+                },
+                methods:{
+                    show: function () {
+                        this.fruit.push("单击事件");
+                    },
+                    add:function(){
+                        this.fruit.push("双击事件");
+                    },
+                    ex:function(){
+                        this.isShow = false;
+                    }
+
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <input type="button" v-on:click="show()" value="单击按钮">
+    <input type="button" v-on:dblclick="add()" value="双击按钮">
+    <input type="button" v-on:click="ex()" value="点击消失">
+    <ul>
+        <li v-for="item in fruit">{{item}}</li>
+    </ul>
+    <div v-show="isShow" style="width: 100px;height: 100px;border:1px solid #333;background: #ff0000;">一个隐藏的元素</div>
+</div>
+</body>
+</html>
