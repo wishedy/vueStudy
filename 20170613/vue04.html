@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue关于模板的使用</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload = function(){
+            var c = new  Vue({
+               el:".box",
+                data:{
+                    msg:"hhhh"
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+<div class="box">
+    <!--数据更新模板也更新-->
+    <input type="text" v-model="msg">
+    <p>{{msg}}</p>
+    <!--数据前面加*代表数据只绑定一次-->
+    <p>{{*msg}}</p>
+    <!--三个花括号可以把相应的数据进行转义，例如数据里面有html代码-->
+    <p>{{{msg}}}</p>
+</div>
+</body>
+</html>

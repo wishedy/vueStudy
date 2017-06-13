@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件冒泡</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload=function(){
+            var  c = new Vue({
+                el:".box",
+                data:{
+
+                },
+                methods:{
+                    show:function(e){
+                        console.log(e)
+                        //e.cancelBubble = true;//原生写法
+                        //vue写法在事件之后直接加stop
+                        //@contextmenu点击鼠标右键的时候生效，但是与此同时调出了右键系统菜单
+                        //解决的办法，
+                        //e.preventDefault();//原生组织系统默认
+                        //vue 提供事件后加prevent
+                        console.log("点击")
+                    },
+                    show2:function(){
+                        console.log("冒泡了");
+                    },
+                    keyDown:function(e){
+                        console.log("原生产生键盘码:"+e.keyCode)
+                        console.log("键盘事件");
+                        //可以直接根据键盘码来进行相应的判断做相应的操作，方便的是vue为常用键提供了简介方法
+                        //就是直接在事件后面挂上相应键盘的键码
+                        //但是如果记不住可以直接挂在键盘上的字母
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <div class="de" @click="show2()">
+        <input type="button" value="冒泡按钮"  @click.stop="show($event)">
+        <input type="button" value="冒泡按钮"  @contextmenu.prevent="show($event)">
+        <input type="text" placeholder="键盘事件" @keydown="keyDown($event)">
+        <input type="text" placeholder="键盘回车键值事件" @keydown.13="keyDown($event)">
+        <input type="text" placeholder="键盘回车字母事件" @keydown.enter="keyDown($event)">
+        <!--keyup同理-->
+    </div>
+</div>
+</body>
+</html>

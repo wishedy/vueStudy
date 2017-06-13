@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue数据交互</title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        /*当引入vue-resource文件后，就相当于vue下面多了一个模块$http*/
+        window.onload=function(){
+            var c = new Vue({
+                "el":".box",
+                data:{
+
+                },
+                methods:{
+                    get:function(){
+                        /*单纯的获取一条数据*/
+                        this.$http.get("a.txt").then(function(res){
+                                console.log("成功的回调");
+                            console.log(res.data)
+                        },function(){
+                            console.log("失败的回调");
+                        });
+                        /*向后台传送数据*/
+                        this.$http.get("get.php",{"a":1,"b":2}).then(function(res){
+                            console.log(res.data)
+                        },function(){});
+                        /*post与get同理*/
+                        this.$http.get("get.php",{"a":1,"b":2},{jsonp:"cb"//默认名字是callback，视具体情况改编成规定字段
+                             }).then(function(res){
+                            console.log(res.data)
+                        },function(){});
+                        this.$http.jsonp("https://sug.so.360.cn/suggest",{"word":"a"},{emulateJson:true}).then(function(res){
+                            console.log(res.data.s);
+                        },function(){
+
+                        })
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <input type="button" value="按钮" @click="get()">
+    <!--vue本身的框架不支持数据交互，可以理解为ajax,如果想交互需要引入官方提供的vue-resouce-->
+    <!--常见的交互方式get post jsonp-->
+</div>
+</body>
+</html>

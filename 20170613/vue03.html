@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue属性</title>
+    <style>
+        .red{
+            color:#ff0000;
+        }
+        .blue{
+            color:#2a6496;
+        }
+    </style>
+    <script src="vue.js"></script>
+    <script>
+        window.onload=function(){
+            var c = new Vue({
+                el:".box",
+                data:{
+                    imgUrl:"https://www.baidu.com/img/bd_logo1.png",
+                    w:"200px",
+                    red:"red",
+                    b:"blue",
+                    c:"red",
+                    color:{"color":"red"},
+                    bc:{"background":"blue"}
+                },
+                methods:{
+
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <img src="{{imgUrl}}" alt=""><!--这个数据缺失能展示出来，但是会出现一个报错-->
+    <!--在vue中属性是用v-bind绑定的，绑定后就不用{{}}来取值了-->
+    <!--v:bind类似于事件指令同样有简写，简写是一个：-->
+    <img v-bind:src="imgUrl" alt="" :width="w">
+    <!--属性里面两个特殊的属性class,style-->
+    <img :src="imgUrl" alt="">
+    <!--clsss-->
+    <strong class="red">这是一个文字</strong>
+    <!--class第一种用法，red在这里是data下的数据，数组当然也可以是数据操控的-->
+    <strong :class="[red,b]">这是一个文字</strong>
+    <!--第二种用法,这里的true可以是数据操控的,整个class本身就是个json数据，也可以被操控-->
+    <strong :class="{red:false,blue:true}">这是一个文字</strong>
+    <!--第三种用法-->
+    <strong :class="">这是一个文字</strong>
+    <!--style用法-->
+    <strong :style="{color:c}">这是一个文字</strong>
+    <strong :style="[color,bc]">这是一个文字</strong>
+    <!--注意：复合样式要使用驼峰命名-->
+</div>
+</body>
+</html>

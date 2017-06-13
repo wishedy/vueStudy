@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue过滤器</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload = function(){
+            var c = new Vue({
+                "el":".box",
+                data:{
+
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <h1>常用过滤器</h1>
+    <p>welcome全部变成大写{{"welcome"|uppercase}}</p>
+    <p>welcome全部变成小写{{"WELCOME"|lowercase}}</p>
+    <p>welcome首字母变成大写{{"welcome"|capitalize}}</p>
+    <h4>多个过滤器使用</h4>
+    <p>welcome全部变成小写，但是首字母变成大写{{"WELCOME"|lowercase|capitalize}}</p>
+    <p>把数字变成钱{{12|currency}}</p>
+    <p>把数字变成钱，过滤器传参{{12|currency "@"}}</p>
+</div>
+</body>
+</html>

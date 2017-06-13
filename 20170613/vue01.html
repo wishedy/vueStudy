@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue事件深入</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload = function(){
+            var c = new Vue({
+                "el":".box",
+                data:{
+
+                },
+                methods:{
+                    show:function(e){
+                        alert("点击生效");
+                        console.log(e)
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <input type="button" v-on:click="show()" value="按钮1">
+    <input type="button" @click="show($event)" value="按钮2">
+</div>
+</body>
+</html>

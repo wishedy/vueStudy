@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue模拟百度下拉框</title>
+    <style>
+        .red{
+            color:#ff0000;
+        }
+    </style>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload=function(){
+            var c = new Vue({
+                "el":".box",
+                data:{
+                    myData:[],
+                    tl:"",
+                    now:-1
+                },
+                methods:{
+                    requestData:function(e){
+                        if((e.keyCode==38)||(e.keyCode==40)){
+                            return false;
+                        }
+                        if(e.keyCode==13){
+                            window.open("https://www.baidu.com/s?wd="+this.tl);
+                            this.tl="";
+                        }
+                        this.$http.jsonp("https://sug.so.360.cn/suggest",{"word":this.tl}).then(function(res){
+                            this.myData=res.data.s;
+                        });
+                    },
+                    changeDown:function(){
+                        this.now++;
+                        if(this.now==this.myData.length){
+                            this.now=0;
+                        }
+                        this.tl=this.myData[this.now];
+                    },
+                    changeUp:function(){
+                        this.now--;
+                        if(this.now==-1){
+                            this.now=this.myData.length-1;
+                        }
+                        this.tl=this.myData[this.now];
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <input type="text" v-model="tl" @keyup="requestData($event)" @keydown.down="changeDown()" @keydown.up.prevent="changeUp()">
+    <ul v-show="myData.length!=0">
+        <li v-for="item in myData" :class="{red:$index==now}">{{$index}}{{item}}</li>
+    </ul>
+    <p v-show="myData.length==0">暂无数据...</p>
+</div>
+</body>
+</html>
