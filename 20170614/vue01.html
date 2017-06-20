@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue生存周期</title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload=function(){
+            var c = new Vue({
+                "el":".box",
+                "data":{
+                    msg:"这是一条编译数据"
+                },
+                method:{
+
+                },
+                created:function(){
+                    console.log("实例已经创建");
+                },
+                beforeCompile:function(){
+                    console.log("实例创建完在编译之前触发的");
+                },
+                compiled:function(){
+                    console.log("编译之后");
+                },
+                ready:function(){
+                    console.log("相当于$(document).ready()")
+                },
+                beforeDestroy:function(){
+                    console.log("在对象实例销毁之前");
+                },
+                destroyed:function(){
+                    console.log("销毁之后");
+                }
+            });
+            /*vue创建完成的标志叫钩子函数
+            * created:实例创建后执行
+            *
+            * */
+            /*点击页面销毁vue对象*/
+            document.onclick=function(){
+                c.$destroy();
+                /*vue下存在的销毁对象的方法，销毁之后这个对象挂在的内容将不能再使用*/
+            };
+            /*v-cloak,在页面刷新过快的时候会出现用户会看到花括号，这时候添加v-cloak属性，防止闪烁，一般用在比较大的模块，
+            *
+            * 较段的文本直接用v-text就行
+            * 如果数据包含html代码用v-html(v2.0专用)
+            * */        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <p>{{msg}}</p>
+    <p v-cloak>{{msg}}</p>
+    <span v-text="msg"></span>
+</div>
+</body>
+</html>

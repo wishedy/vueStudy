@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue循环下的重复数据</title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload=function(){
+            var c = new Vue({
+                "el":".box",
+                data:{
+                    arr:["orange","apple","pear"]
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <ul><!--$index相当于数据的唯一标识，不添加的时候，如果往数组里添加的数据重复，将不会实现-->
+        <li v-for="item in arr" track-by="$index">{{item}}</li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue过滤html标签</title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload=function(){
+            /*Vue.filter("html",function(a){
+               // return a.replace(/<[^<+]>/g);/!*这时候不会实现效果，而且会报错，因为v-model的数据报错要使用双向的*!/
+
+            });*/
+            Vue.filter("html",{
+                "read":function(a){/*注意正则表达式要写正确*/
+                    return a.replace(/<[^<]+>/g,"");
+                },
+                write:function(v){//view--->model
+                    console.log(v);
+                    return v;
+                }
+            });
+            var c = new Vue({
+                "el":".box",
+                data:{
+                    msg:"<strong>welcome</strong>"
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <input type="text" v-model="msg|html">
+    <p v-html="msg"></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue过滤器-debounce</title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload=function(){
+            var c = new Vue({
+                "el":".box",
+                methods:{
+                    show:function(){
+                        console.log("执行")
+                    }
+                },
+                data:{
+                    arr:["a","b","c"],
+                    fruit:["apple","pare","orange"],
+                    a:"",
+                    math:[3,1,45,12,96,11]
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <!--延迟两秒执行具体的操作-->
+    <input type="text" @keyup="show|debounce 2000" v-model="a">
+    <!--与数组配合使用的过滤器-->
+    <!--limitBy限制几个
+    limitBy可以接收参数第一个参数：取几个，第二个参数是从哪儿开始标准位置，不取这个位置的数据
+    -->
+    <ul>
+        <li v-for="item in  arr|limitBy 2 1">{{item}}</li>
+    </ul>
+    <ul>
+        <li v-for="item in fruit|filterBy a">{{item}}</li>
+    </ul>
+    <ul><!--1代表正顺序-->
+        <li v-for="item in math |orderBy 1">{{item}}</li>
+    </ul>
+    <ul><!--负1代表逆顺序-->
+        <li v-for="item in math |orderBy -1">{{item}}</li>
+    </ul>
+</div>
+</body>
+</html>

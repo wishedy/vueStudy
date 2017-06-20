@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue自定义过滤器</title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload=function(){
+            Vue.filter("toDou",function(a,b,c){
+                /*if(this.a<10){
+                    this.a = "0"+this.a;
+                }*/
+                console.log(b,c)
+                return a<10?"0"+a:a;
+            });
+            Vue.filter("time",function(a){
+                console.log(a);
+                var data = new Date(a);
+                return (data.getFullYear())+"-"+(data.getMonth()+1)+"-"+(data.getDate())
+            });
+            var c = new Vue({
+                "el":".box",
+                data:{
+                    a:9,
+                    b:Date.now()
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+<p>{{a|toDou 1 2}}</p>
+    <p>{{b|time}}</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue自定义元素指令</title>
+    <style>
+        firefly{
+            width:100px;
+            height:200px;
+            background:#ff0000;
+            display: block;
+        }
+    </style>
+    <script src="vue.js"></script>
+    <script>
+        window.onload=function(){
+            Vue.elementDirective("firefly",{
+                "bind":function(color){
+                    this.el.style.background="blue";
+                }
+            })
+            var c = new Vue({
+                "el":".box",
+                data:{
+                    msg:"a"
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <p>{{msg}}</p>
+    <!--元素指令用处不大-->
+    <firefly></firefly>
+</div>
+</body>
+</html>

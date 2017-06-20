@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue监听</title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload=function(){
+            var c = new Vue({
+               el:".box" ,
+                data:{
+                    a:1
+                },
+                methods:{
+
+                },
+                computed:{
+                   /* b:function(){
+                        /!*专门监听属性b的函数
+                        * b数据的展示完全取决于该函数的返回值
+                        * *!/
+                        return this.a+1;
+
+                    },*/
+                    b:{/*真正的完整形式*/
+                        get:function(){
+                            return this.a+1;
+                        },
+                        set:function(v){
+                            this.a = v;
+                        }
+                    }
+                }
+            });
+//            console.log(c.a)
+            document.onclick=function(){
+                c.b = 111;
+            }
+            console.log(c.$el);
+            console.log(c.$data);
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <p>{{a}}</p>
+    <p>{{b}}</p>
+</div>
+</body>
+</html>

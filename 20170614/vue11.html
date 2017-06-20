@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue自定义键盘信息</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload=function(){
+            /*ctrl键码17*/
+            Vue.directive("on").keyCodes.ctrlss=17;
+            var c = new Vue({
+                "el":".box",
+                data:{
+
+                },
+                methods:{
+                    show:function(){
+                        console.log("执行");
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <input type="text" @keydown.enter="show">
+    <input type="text" @keydown.ctrlss="show">
+</div>
+</body>
+</html>

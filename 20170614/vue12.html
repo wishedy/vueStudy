@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue自定义键盘信息</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload=function(){
+            /*ctrl键码17*/
+            var c = new Vue({
+                "el":".box",
+                data:{
+                    msg:"wwww",
+                    b:2,
+                    info:{name:"zzz",sex:"man"}
+                },
+                methods:{
+
+                }
+            });
+            c.$watch("msg",function(a,b){/*这样只能见识浅层数据，深度数据，例如json*/
+                console.log("发生变化了","新数据"+a,"老数据"+b);
+            });
+            c.$watch("info",function(a,b){
+               console.log("用户信息发生变化了");
+            },{"deep":true});//深度监听
+            document.onclick=function(){
+                c.msg=333;
+                c.info.name="www";
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <p>{{msg}}</p>
+    <p>{{b}}</p>
+    <p>{{info|json}}</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue自定义属性指令</title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload=function(){
+            Vue.directive("red",function(a){
+                console.log(a);//this.el//是当前指令原生所在的元素
+                //a是这个指令下面配的值
+                this.el.style.background="#ff0000";
+            });
+            var c = new Vue({
+                "el":".box",
+                data:{
+                    a:"welcome"
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <p>{{a}}</p>
+    <p v-text="a"></p>
+    <!--自定义指令必须以v-开始-->
+    <p v-red>444444</p>
+</div>
+</body>
+</html>

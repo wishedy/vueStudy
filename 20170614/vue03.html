@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue主动加载</title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload = function(){
+            /*var c = new Vue({
+                data:{
+                    msg:"aaa"
+                }
+            });
+            c.$mount(".box");//手动挂载元素*/
+            var c = new Vue({
+                aa:"11",//自定义属性
+                data:{
+                    msg:"aaa"
+                }
+            }).$mount(".box");
+            console.log(c.$options.aa);//获取自定义属性
+            /*$destroy销毁对象*/
+            /*$log查看数据状态*/
+
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <p>{{msg}}</p>
+    <p v-text="msg"></p>
+</div>
+</body>
+</html>

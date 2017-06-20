@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue自定义拖拽指令</title>
+    <style>
+        .drag{
+            width:300px;
+            height:300px;
+            background: #ff0000;
+            border:1px solid #333;
+            position: absolute;
+        }
+    </style>
+    <script src="vue.js"></script>
+    <script>
+        window.onload = function(){
+            Vue.directive("drag",function(){
+
+            });
+            var c = new Vue({
+                "el":".box",
+                data:{
+
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <div class="drag"></div>
+</div>
+</body>
+</html>
